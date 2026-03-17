@@ -34,7 +34,7 @@ const StudentPage = () => {
   // inital data fetch
   useEffect(() => {
     loadStudents();
-  });
+  }, []);
 
   return (
     <div className="p-8 max-w-7x1 mx-auto">
