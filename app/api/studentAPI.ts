@@ -2,9 +2,9 @@ import axios from "axios";
 
 const API_URL = "http://localhost:3001";
 
-export interface Student {
+interface Student {
   _id: string;
-  fristName: string;
+  firstName: string;
   lastName: string;
   email: string;
   age: number;

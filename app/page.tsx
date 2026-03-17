@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
-import { fetchStudents, submitStudent } from "./api/studentAPI";
+import { fetchStudents } from "./api/studentAPI";
 import { set } from "mongoose";
 
 interface Student {
@@ -18,44 +18,29 @@ const StudentPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
   const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
 
-  // fetch all students
+  // Fetch All Students
   const loadStudents = async () => {
     try {
       const data = await fetchStudents();
       setStudents(data);
     } catch (error) {
-      console.error("Error fetching students:", error);
+      console.log("Error fetching Students:", error);
     }
   };
+  // Submit Student (Add or Update)
 
-  // submit student (add or update)
-  const handleSubmit = async (student: Omit<Student, "_id">, id?: string) => {
-    try {
-      await submitStudent(student, id);
-      setSelectedStudent(null);
-      await loadStudents();
-    } catch (error) {
-      console.error("Error submitting student:", error);
-    }
-  };
-  // delete student by ID
-  const handleDelete = async (id: string) => {
-    try {
-      await deleteStudent(id);
-      await loadStudents();
-    } catch (error) {
-      console.error("Error Deleting student:", error);
-    }
-  };
-  // initial data fetch
+  // Delete Student by ID
+
+  // inital data fetch
   useEffect(() => {
     loadStudents();
-  }, []);
+  });
 
   return (
     <div className="p-8 max-w-7x1 mx-auto">
       <h1 className="text-3x1 font-extrabold text-gray-800 mb-6">Students</h1>
-      {/* We Got The Table */}
+
+      {/* Table*/}
       <div className="overflow-x-auto rounded-lg shadow-lg mb-8">
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-100">
@@ -76,7 +61,7 @@ const StudentPage = () => {
                 Age
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
-                CurrentCollege
+                Current College
               </th>
               <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
                 Actions
@@ -104,16 +89,18 @@ const StudentPage = () => {
                 <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
                   {student.currentCollege}
                 </td>
-                <td className="px-6 py-4 text-sm whitespace-nowrap">
+                <td>
                   <button
                     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg mr-2 text-sm"
-                    onClick={() => setSelectedStudent(student)}
+                    onClick={() => {}}
                   >
                     Update
                   </button>
+                </td>
+                <td>
                   <button
                     className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg mr-2 text-sm"
-                    onClick={() => handleDelete(student._id)}
+                    onClick={() => {}}
                   >
                     Delete
                   </button>
@@ -124,8 +111,9 @@ const StudentPage = () => {
         </table>
       </div>
 
-      <StudentForm student={selectedStudent} onSubmit={handleSubmit} />
+      <StudentForm />
     </div>
   );
 };
+
 export default StudentPage;

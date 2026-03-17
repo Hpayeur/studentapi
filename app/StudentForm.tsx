@@ -27,15 +27,19 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
   useEffect(() => {
     if (student) {
       const { _id, ...rest } = student;
-      setFormState(rest);
+      setTimeout(() => setFormState(rest), 0);
     } else {
-      setFormState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        age: 0,
-        currentCollege: "",
-      });
+      setTimeout(
+        () =>
+          setFormState({
+            firstName: "",
+            lastName: "",
+            email: "",
+            age: 0,
+            currentCollege: "",
+          }),
+        0,
+      );
     }
   }, [student]);
 
