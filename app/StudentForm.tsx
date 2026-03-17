@@ -1,3 +1,4 @@
+import { set } from "mongoose";
 import React, { useState, useEffect } from "react";
 
 interface Student {
@@ -26,6 +27,7 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
   useEffect(() => {
     if (student) {
       const { _id, ...rest } = student;
+      setFormState(rest);
     } else {
       setFormState({
         firstName: "",
@@ -76,7 +78,7 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
           type="text"
           placeholder="Age"
           value={formState.age}
-          onChange={(e) => handleChange("age", e.target.value)}
+          onChange={(e) => handleChange("age", Number(e.target.value))}
           className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
@@ -87,7 +89,10 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
           className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
       </div>
-      <button className="" onClick={handleSubmit}>
+      <button
+        className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-sm"
+        onClick={handleSubmit}
+      >
         {student ? "Update Student" : "Add New Student"}
       </button>
     </div>
