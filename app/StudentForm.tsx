@@ -51,8 +51,45 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
         {student ? "Update Student" : "Add New Student"}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
-        <input type="text" placeholder="First Name" />
+        <input
+          type="text"
+          placeholder="First Name"
+          value={formState.firstName}
+          onChange={(e) => handleChange("firstName", e.target.value)}
+          className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
+        />
+        <input
+          type="text"
+          placeholder="Last Name"
+          value={formState.lastName}
+          onChange={(e) => handleChange("lastName", e.target.value)}
+          className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
+        />
+        <input
+          type="text"
+          placeholder="Email"
+          value={formState.email}
+          onChange={(e) => handleChange("email", e.target.value)}
+          className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
+        />
+        <input
+          type="text"
+          placeholder="Age"
+          value={formState.age}
+          onChange={(e) => handleChange("age", e.target.value)}
+          className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
+        />
+        <input
+          type="text"
+          placeholder="Current College"
+          value={formState.currentCollege}
+          onChange={(e) => handleChange("currentCollege", e.target.value)}
+          className="border border-gray-300 focusing:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
+        />
       </div>
+      <button className="" onClick={handleSubmit}>
+        {student ? "Update Student" : "Add New Student"}
+      </button>
     </div>
   );
 };
