@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
 import { deleteStudent, fetchStudents, submitStudent } from "./api/studentAPI";
-import { set } from "mongoose";
 
 interface Student {
   _id: string;
@@ -61,25 +60,25 @@ const StudentPage = () => {
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 ID
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 First Name
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 Last Name
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 Email
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 Age
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 Current College
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-600">
+              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
                 Actions
               </th>
             </tr>
@@ -87,22 +86,22 @@ const StudentPage = () => {
           <tbody className="divide-y divide-gray-200">
             {students.map((student) => (
               <tr key={student._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student._id}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student.firstName}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student.lastName}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student.email}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student.age}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
                   {student.currentCollege}
                 </td>
                 <td>
