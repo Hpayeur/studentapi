@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 interface Student {
   _id: string;
@@ -15,29 +15,22 @@ interface StudentFormProps {
 }
 
 const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
-  const [formState, setFormState] = useState<Omit<Student, "_id">>({
-    firstName: "",
-    lastName: "",
-    email: "",
-    age: 0,
-    currentCollege: "",
-  });
-
-  useEffect(() => {
+  const [formState, setFormState] = useState<Omit<Student, "_id">>(() => {
     if (student) {
       const { _id, ...rest } = student;
-    } else {
-      setFormState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        age: 0,
-        currentCollege: "",
-      });
+      void _id;
+      return rest;
     }
-  }, [student]);
+    return {
+      firstName: "",
+      lastName: "",
+      email: "",
+      age: 0,
+      currentCollege: "",
+    };
+  });
 
-  const handleChange = (field: keyof Omit<Student, "_id">, value: any) => {
+  const handleChange = (field: keyof Omit<Student, "_id">, value: unknown) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 

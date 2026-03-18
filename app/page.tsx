@@ -45,7 +45,13 @@ const StudentPage = () => {
   };
   //initial data fetch
   useEffect(() => {
-    loadStudents();
+    const fetchOnMount = async () => {
+      await loadStudents();
+    };
+    const t = setTimeout(() => {
+      void fetchOnMount();
+    }, 0);
+    return () => clearTimeout(t);
   }, []);
 
   return (
