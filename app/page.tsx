@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
-import { fetchStudents } from "./api/studentAPI";
+import { fetchStudents, submitStudent } from "./api/studentAPI";
 import { set } from "mongoose";
 
 interface Student {
@@ -28,9 +28,25 @@ const StudentPage = () => {
     }
   };
   // Submit Student (Add or Update)
+  const handleSubmit = async (student: Omit<Student, "_id">, id?: string) => {
+    try {
+      await submitStudent(student, id);
+      setSelectedStudent(null);
+      loadStudents();
+    } catch (error) {
+      console.log("Error submitting student:", error);
+    }
+  };
 
   // Delete Student by ID
-
+  const handleDelete = async (id: string) => {
+    try {
+      await deleteStudent(id);
+      loadStudents();
+    } catch (error) {
+      console.log("Error deleting student:", error);
+    }
+  };
   // inital data fetch
   useEffect(() => {
     loadStudents();
@@ -92,7 +108,7 @@ const StudentPage = () => {
                 <td>
                   <button
                     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg mr-2 text-sm"
-                    onClick={() => {}}
+                    onClick={() => setSelectedStudent(student)}
                   >
                     Update
                   </button>
@@ -100,7 +116,7 @@ const StudentPage = () => {
                 <td>
                   <button
                     className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg mr-2 text-sm"
-                    onClick={() => {}}
+                    onClick={() => handleDelete(student._id)}
                   >
                     Delete
                   </button>
@@ -111,7 +127,7 @@ const StudentPage = () => {
         </table>
       </div>
 
-      <StudentForm />
+      <StudentForm student={selectedStudent} onSubmit={handleSubmit} />
     </div>
   );
 };
