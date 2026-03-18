@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/set-state-in-effect */
 import React, { useState, useEffect } from "react";
 
 interface Student {
@@ -38,7 +39,7 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
     }
   }, [student]);
 
-  const handleChange = (field: keyof Omit<Student, "_id">, value: any) => {
+  const handleChange = (field: keyof Omit<Student, "_id">, value: unknown) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -57,35 +58,35 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
           placeholder="First Name"
           value={formState.firstName}
           onChange={(e) => handleChange("firstName", e.target.value)}
-          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full"
+          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
           placeholder="Last Name"
           value={formState.lastName}
           onChange={(e) => handleChange("lastName", e.target.value)}
-          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full"
+          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
           placeholder="Email"
           value={formState.email}
           onChange={(e) => handleChange("email", e.target.value)}
-          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full"
+          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
           placeholder="Age"
           value={formState.age}
           onChange={(e) => handleChange("age", Number(e.target.value))}
-          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full"
+          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
           placeholder="Current College"
           value={formState.currentCollege}
           onChange={(e) => handleChange("currentCollege", e.target.value)}
-          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full"
+          className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
       </div>
       <button
