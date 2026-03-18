@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import StudentForm from "./StudentForm";
-import { fetchStudents, submitStudent } from "./api/studentAPI";
+import { deleteStudent, fetchStudents, submitStudent } from "./api/studentAPI";
 import { set } from "mongoose";
 
 interface Student {
