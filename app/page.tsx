@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import StudentForm from "./StudentForm";
 import { deleteStudent, fetchStudents, submitStudent } from "./api/studentAPI";
 
@@ -15,38 +15,35 @@ interface Student {
 
 const StudentPage = () => {
   const [students, setStudents] = useState<Student[]>([]);
-  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [selectedStudents, setSelectedStudent] = useState<Student | null>(null);
 
-  // Fetch All Students
+  // fetch all students
   const loadStudents = async () => {
     try {
       const data = await fetchStudents();
       setStudents(data);
     } catch (error) {
-      console.log("Error fetching Students:", error);
+      console.error("Error Fetching Students: ", error);
     }
   };
-  // Submit Student (Add or Update)
+  //submit students
   const handleSubmit = async (student: Omit<Student, "_id">, id?: string) => {
     try {
       await submitStudent(student, id);
       setSelectedStudent(null);
-      loadStudents();
     } catch (error) {
-      console.log("Error submitting student:", error);
+      console.error("Error Submitting Student.", error);
     }
   };
-
-  // Delete Student by ID
+  //delete student by id
   const handleDelete = async (id: string) => {
     try {
       await deleteStudent(id);
-      loadStudents();
     } catch (error) {
-      console.log("Error deleting student:", error);
+      console.error("Error Submitting Student.", error);
     }
   };
-  // inital data fetch
+  //initial data fetch
   useEffect(() => {
     loadStudents();
   }, []);
@@ -55,30 +52,30 @@ const StudentPage = () => {
     <div className="p-8 max-w-7x1 mx-auto">
       <h1 className="text-3x1 font-extrabold text-gray-800 mb-6">Students</h1>
 
-      {/* Table*/}
+      {/* Table */}
       <div className="overflow-x-auto rounded-lg shadow-lg mb-8">
         <table className="min-w-full bg-white divide-y divide-gray-200">
           <thead className="bg-gray-100">
             <tr>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
-                ID
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
+                Id
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 First Name
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 Last Name
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 Email
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 Age
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 Current College
               </th>
-              <th className="px-6 py-3 text-left text-sm font-semibold text-gray-800">
+              <th className="px-6 py3 text-left text-sm font-semibold text-gray-600">
                 Actions
               </th>
             </tr>
@@ -86,25 +83,25 @@ const StudentPage = () => {
           <tbody className="divide-y divide-gray-200">
             {students.map((student) => (
               <tr key={student._id} className="hover:bg-gray-50">
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student._id}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student.firstName}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student.lastName}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student.email}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student.age}
                 </td>
-                <td className="px-6 py-4 text-sm text-gray-800 whitespace-nowrap">
+                <td className="px-6 py-4 text-sm text-gray-700 whitespace-nonwrap">
                   {student.currentCollege}
                 </td>
-                <td>
+                <td className="px-6 py-4 text-sm whitespace-nowrap">
                   <button
                     className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg mr-2 text-sm"
                     onClick={() => setSelectedStudent(student)}
@@ -126,7 +123,7 @@ const StudentPage = () => {
         </table>
       </div>
 
-      <StudentForm student={selectedStudent} onSubmit={handleSubmit} />
+      <StudentForm student={selectedStudents} onSubmit={handleSubmit} />
     </div>
   );
 };

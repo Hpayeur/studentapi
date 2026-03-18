@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/set-state-in-effect */
 import React, { useState, useEffect } from "react";
 
 interface Student {
@@ -27,7 +26,6 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
   useEffect(() => {
     if (student) {
       const { _id, ...rest } = student;
-      setFormState(rest);
     } else {
       setFormState({
         firstName: "",
@@ -39,7 +37,7 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
     }
   }, [student]);
 
-  const handleChange = (field: keyof Omit<Student, "_id">, value: unknown) => {
+  const handleChange = (field: keyof Omit<Student, "_id">, value: any) => {
     setFormState((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -48,42 +46,42 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
   };
 
   return (
-    <div className="bg-white shadow-lg p-6 rounded-lg">
-      <h2 className="text-2xl font-bold text-gray-800 mb-4">
+    <div className="bg-white shadow-1g p-6 rounded-1g">
+      <h2 className="text-2x1 font-bold text-gray-800 mb-4">
         {student ? "Update Student" : "Add New Student"}
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-6">
         <input
           type="text"
-          placeholder="First Name"
+          placeholder="first Name"
           value={formState.firstName}
           onChange={(e) => handleChange("firstName", e.target.value)}
           className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
-          placeholder="Last Name"
+          placeholder="last Name"
           value={formState.lastName}
           onChange={(e) => handleChange("lastName", e.target.value)}
           className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
-          placeholder="Email"
+          placeholder="email"
           value={formState.email}
           onChange={(e) => handleChange("email", e.target.value)}
           className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
-          placeholder="Age"
+          placeholder="age"
           value={formState.age}
-          onChange={(e) => handleChange("age", Number(e.target.value))}
+          onChange={(e) => handleChange("age", e.target.value)}
           className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
         />
         <input
           type="text"
-          placeholder="Current College"
+          placeholder="currentCollege"
           value={formState.currentCollege}
           onChange={(e) => handleChange("currentCollege", e.target.value)}
           className="border border-gray-300 focus:ring-blue-500 focus:border-blue-500 px-4 py-2 rounded-lg w-full text-black"
@@ -93,7 +91,7 @@ const StudentForm = ({ student, onSubmit }: StudentFormProps) => {
         className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg text-sm"
         onClick={handleSubmit}
       >
-        {student ? "Update Student" : "Add New Student"}
+        {student ? "Update Student" : "Add new Student"}
       </button>
     </div>
   );
